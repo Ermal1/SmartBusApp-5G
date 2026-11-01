@@ -1,0 +1,424 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  
+  /* Primary theme colors - Yellow */
+  --primary: #F4B000;
+  --primary-foreground: #111827;
+  --primary-soft: rgba(244, 176, 0, 0.18);
+  --primary-soft-2: rgba(244, 176, 0, 0.10);
+  
+  /* Secondary color - Light pink */
+  --secondary: #F5DEE0;
+  
+  /* Surface colors */
+  --surface: #FFFFFF;
+  
+  /* Muted colors */
+  --muted: rgba(244, 176, 0, 0.12);
+  --muted-light: #F3F4F6;
+  
+  /* Chip colors - soft pastel */
+  --chip-bg-cream: #FDF2D8;
+  --chip-bg-light-yellow: #FFF8E8;
+  --chip-bg-light-pink: #F5DEE0;
+  --chip-text: #374151;
+  --chip-border: rgba(0, 0, 0, 0.06);
+  
+  /* Legacy brand colors (for backward compatibility) */
+  --brand-yellow: #F4B000;
+  --brand-yellow-600: #F4B000;
+  --brand-yellow-700: #D69E00;
+  --brand-yellow-50: rgba(244, 176, 0, 0.12);
+  --brand-yellow-100: rgba(244, 176, 0, 0.20);
+  --brand-black: #1A1A1A;
+  --brand-bg: #FFFBF0;
+  --card-bg: #FFFFFF;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--brand-bg);
+  color: var(--brand-black);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Bus float/drive animation for hero */
+@keyframes bus-float-drive {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-8px) translateX(4px);
+  }
+  50% {
+    transform: translateY(-12px) translateX(8px);
+  }
+  75% {
+    transform: translateY(-8px) translateX(4px);
+  }
+}
+
+.animate-bus-float-drive {
+  animation: bus-float-drive 4s ease-in-out infinite;
+}
+
+/* New bus drive animation - smooth horizontal movement along road */
+@keyframes bus-drive {
+  0% {
+    transform: translateX(-10%) translateY(0);
+  }
+  50% {
+    transform: translateX(10%) translateY(0);
+  }
+  100% {
+    transform: translateX(-10%) translateY(0);
+  }
+}
+
+/* Speed lines fade animation */
+@keyframes speed-lines {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.animate-bus-drive {
+  animation: bus-drive 8s ease-in-out infinite;
+}
+
+.animate-speed-lines {
+  animation: speed-lines 3s ease-in-out infinite;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animate-bus-drive,
+  .animate-speed-lines,
+  .animate-bus-float-drive {
+    animation: none;
+  }
+}
+
+/* Smooth transitions for bus markers on mini-map */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulse-ring-outer {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.3;
+  }
+}
+
+/* Pulse wave animation for selected bus spotlight */
+@keyframes pulse-wave {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Pulse line animation */
+@keyframes pulse-line {
+  0%, 100% {
+    opacity: 0.6;
+    stroke-width: 2;
+  }
+  50% {
+    opacity: 1;
+    stroke-width: 3;
+  }
+}
+
+/* Fade trail animation */
+@keyframes fade-trail {
+  0% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Arrow pulse for fast-moving buses */
+@keyframes arrow-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Blob animation for landing page background */
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
+
+/* Gradient animation for text */
+@keyframes gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradient 3s linear infinite;
+}
+
+/* Elegant float animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Slow pulse for subtle effects */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+/* Fade in animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.animate-fade-in-delay {
+  animation: fade-in 0.8s ease-out 0.2s both;
+}
+
+.animate-fade-in-delay-2 {
+  animation: fade-in 1s ease-out 0.4s both;
+}
+
+/* Bus animation - enhanced dynamic movement */
+@keyframes bus-move {
+  0% {
+    transform: translateX(-15px) translateY(0px) rotate(-6deg) scale(1);
+  }
+  25% {
+    transform: translateX(5px) translateY(-8px) rotate(-2deg) scale(1.02);
+  }
+  50% {
+    transform: translateX(15px) translateY(-5px) rotate(2deg) scale(1.05);
+  }
+  75% {
+    transform: translateX(5px) translateY(-8px) rotate(-2deg) scale(1.02);
+  }
+  100% {
+    transform: translateX(-15px) translateY(0px) rotate(-6deg) scale(1);
+  }
+}
+
+.animate-bus-move {
+  animation: bus-move 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Bus horizontal movement - from left to right across the card */
+@keyframes bus-horizontal {
+  0% {
+    transform: translateX(-80%) translateY(-8px) rotate(-4deg) scale(0.85);
+    opacity: 0.7;
+  }
+  15% {
+    transform: translateX(-40%) translateY(-6px) rotate(-2deg) scale(0.9);
+    opacity: 0.85;
+  }
+  30% {
+    transform: translateX(0%) translateY(-4px) rotate(0deg) scale(0.95);
+    opacity: 0.95;
+  }
+  50% {
+    transform: translateX(40%) translateY(-2px) rotate(2deg) scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: translateX(80%) translateY(-4px) rotate(4deg) scale(0.95);
+    opacity: 0.95;
+  }
+  85% {
+    transform: translateX(120%) translateY(-6px) rotate(6deg) scale(0.9);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(160%) translateY(-8px) rotate(8deg) scale(0.85);
+    opacity: 0.7;
+  }
+}
+
+.animate-bus-horizontal {
+  animation: bus-horizontal 10s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Speed lines animation - more dynamic */
+@keyframes speed-line {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateX(10px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+.animate-speed-line {
+  animation: speed-line 1.5s ease-out infinite;
+}
+
+/* Particles animation */
+@keyframes particles {
+  0% {
+    opacity: 0;
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateX(15px) translateY(-5px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(30px) translateY(-10px);
+  }
+}
+
+.animate-particles {
+  animation: particles 2s ease-out infinite;
+}
+
+/* Wheel rotation animation */
+@keyframes wheel-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-wheel-rotate {
+  animation: wheel-rotate 2s linear infinite;
+  transform-origin: center;
+}
+
+/* Google Maps InfoWindow styling - prevent scrolling */
+.gm-style .gm-style-iw-c {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.gm-style .gm-style-iw-d {
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+.gm-style .gm-style-iw-t {
+  overflow: visible !important;
+}
